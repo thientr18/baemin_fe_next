@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Baemin Frontend - Next.js Application
 
-## Getting Started
+A Next.js food delivery application built with React, TypeScript, Ant Design, and Tailwind CSS.
 
-First, run the development server:
+## Project Overview
+
+This project is a food delivery platform frontend built with:
+- **Next.js 14.2.4** - React framework with App Router
+- **TypeScript** - Type-safe development
+- **Ant Design** - UI component library
+- **Tailwind CSS** - Utility-first CSS framework
+- **pnpm** - Fast, disk space efficient package manager
+
+## Docker Deployment
+
+This project is containerized using Docker for easy deployment and consistent environments.
+
+### Prerequisites
+
+- Docker installed on your system
+- Docker daemon running
+
+### Building the Docker Image
+
+Build the Docker image using the following command:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+docker build . -t img-baemin_fe_next
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This command will:
+1. Use Node.js 20 Alpine base image
+2. Install project dependencies using yarn
+3. Build the Next.js application for production
+4. Create an optimized Docker image
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Running the Container
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Run the containerized application:
 
-## Learn More
+```bash
+docker run -d -p 3002:3000 --name cons-baemin_fe_next img-baemin_fe_next
+```
 
-To learn more about Next.js, take a look at the following resources:
+The application will be available at `http://localhost:3002`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Container options:**
+- `-d` - Run container in detached mode (background)
+- `-p 3002:3000` - Map host port 3002 to container port 3000
+- `--name cons-baemin_fe_next` - Assign a name to the container
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Docker Management Commands
 
-## Deploy on Vercel
+**Stop the container:**
+```bash
+docker stop cons-baemin_fe_next
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Start the container:**
+```bash
+docker start cons-baemin_fe_next
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**Remove the container:**
+```bash
+docker rm cons-baemin_fe_next
+```
+
+**Remove the image:**
+```bash
+docker rmi img-baemin_fe_next
+```
+
+**View container logs:**
+```bash
+docker logs cons-baemin_fe_next
+```
+
+**View running containers:**
+```bash
+docker ps
+```
+
+## Local Development (Without Docker)
+
+If you want to run the project locally for development:
+
+```bash
+# Install dependencies
+pnpm install
+
+# Run development server
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view the application.
+
+## Project Structure
+
+- `/app` - Next.js App Router pages and layouts
+- `/components` - Reusable React components
+- `/public` - Static assets (images, fonts)
+- `Dockerfile` - Docker configuration for containerization
+
+## Environment Configuration
+
+The application runs on port 3000 inside the container. Modify the port mapping in the `docker run` command to change the external port.
+
+## Notes
+
+- The Dockerfile uses yarn for dependency management with an extended network timeout for reliability
+- Production builds are optimized for performance
+- The container uses Alpine Linux for minimal image size
