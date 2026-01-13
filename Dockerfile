@@ -11,6 +11,6 @@ RUN yarn build
 EXPOSE 3000
 CMD ["yarn", "start"]
 
-# docker build . -t img-beamin-fe-next
+# docker build . -t img-baemin_fe_next
 
-# docker run -d -p 3002:3000 --name cons-beamin-fe-next img-beamin-fe-next
+# docker run -d -p 3002:3000 --name cons-baemin_fe_next img-baemin_fe_next
