@@ -3,6 +3,8 @@ FROM node:20-alpine
 WORKDIR /baemin_fe_next
 
 COPY package.json yarn.lock ./
+
+RUN yarn config set network-timeout 3000000
 RUN yarn install --frozen-lockfile
 
 COPY . .
